@@ -3,7 +3,7 @@
 		<ContainerImageTag>latest</ContainerImageTag>
 		<PublishProfile>DefaultContainer</PublishProfile>
 		<ContainerImageName>tim-weather-api</ContainerImageName>
-		<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:7.0-alpine</ContainerBaseImage>
+		<!--<ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:7.0-alpine-amd64</ContainerBaseImage>-->
 		<Configuration>Release</Configuration>
 	</PropertyGroup>
 	<ItemGroup>
