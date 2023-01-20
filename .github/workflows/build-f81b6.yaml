@@ -25,7 +25,7 @@ on:
 
 env:
   CONTAINER_REGISTRY_LOGIN_SERVER: ${{ secrets.registry }}.azurecr.io
-  
+  PROJECT_FILE: src/WeatherCluseterAPI/WeatherCluseterAPI.csproj
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
             password: ${{ secrets.mysuperfunservice_PASSWORD_8275 }}
       
       - name: Build and push container image to registry
-        run: dotnet publish -c Release -r linux-x64 -p:ContainerImageTag=${{ github.sha }} --no-self-contained -p:ContainerRegistry=${{ env.CONTAINER_REGISTRY_LOGIN_SERVER }}
+        run: dotnet publish --project ${{ env.PROJECT_FILE }} -c Release -r linux-x64 -p:ContainerImageTag=${{ github.sha }} --no-self-contained -p:ContainerRegistry=${{ env.CONTAINER_REGISTRY_LOGIN_SERVER }}
                   
       - name: Azure login
         id: login
