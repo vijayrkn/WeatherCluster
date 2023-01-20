@@ -7,23 +7,33 @@ spec:
   selector:
     matchLabels:
       app: tim-weather-api
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-  minReadySeconds: 5 
   template:
     metadata:
       labels:
         app: tim-weather-api
     spec:
-      nodeSelector:
-        "beta.kubernetes.io/os": linux
       containers:
       - name: tim-weather-api
         image: mysuperfunservice.azurecr.io/tim-weather-api:latest
         ports:
         - containerPort: 80
+          protocol: TCP
         env:
-        - name: APP_AUTHOR
-          value: "@timheuer"
+        - name: ASPNETCORE_URLS
+          value: http://+:80
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: tim-weather-api
+    labels:
+        app: tim-weather-api
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+    selector:
+        app: tim-weather-api
