@@ -25,7 +25,7 @@ on:
 
 env:
   CONTAINER_REGISTRY_LOGIN_SERVER: ${{ secrets.registry }}.azurecr.io
-  PROJECT_FILE: src/WeatherCluseterAPI/WeatherCluseterAPI.csproj
+  PROJECT_FILE: src/WeatherClusterAPI/WeatherClusterAPI.csproj
 jobs:
   build:
     runs-on: ubuntu-latest
