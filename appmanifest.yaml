@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tim-weather-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tim-weather-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5 
+  template:
+    metadata:
+      labels:
+        app: tim-weather-api
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: tim-weather-api
+        image: mysuperfunservice.azurecr.io/tim-weather-api:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: APP_AUTHOR
+          value: "@timheuer"
